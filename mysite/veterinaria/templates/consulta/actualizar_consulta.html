@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Actualizar Consulta</h1>
+<form method="post" action="{% url 'realizar_actualizacion_consulta' consulta.id_consulta %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_mascota" class="form-label">Mascota</label>
+        <select class="form-select" id="id_mascota" name="id_mascota" required>
+            {% for mascota in mascotas %}
+                <option value="{{ mascota.id_mascota }}" {% if mascota.id_mascota == consulta.id_mascota.id_mascota %}selected{% endif %}>{{ mascota.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="id_veterinario" class="form-label">Veterinario</label>
+        <select class="form-select" id="id_veterinario" name="id_veterinario" required>
+            {% for veterinario in veterinarios %}
+                <option value="{{ veterinario.id_veterinario }}" {% if veterinario.id_veterinario == consulta.id_veterinario.id_veterinario %}selected{% endif %}>{{ veterinario.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="fecha_consulta" class="form-label">Fecha de Consulta</label>
+        <input type="date" class="form-control" id="fecha_consulta" name="fecha_consulta" value="{{ consulta.fecha_consulta|date:'Y-m-d' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="motivo" class="form-label">Motivo</label>
+        <textarea class="form-control" id="motivo" name="motivo" rows="3" required>{{ consulta.motivo }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="diagnostico" class="form-label">Diagnóstico</label>
+        <textarea class="form-control" id="diagnostico" name="diagnostico" rows="3" required>{{ consulta.diagnostico }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="tratamiento" class="form-label">Tratamiento</label>
+        <textarea class="form-control" id="tratamiento" name="tratamiento" rows="3" required>{{ consulta.tratamiento }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="costo" class="form-label">Costo</label>
+        <input type="number" class="form-control" id="costo" name="costo" step="0.01" value="{{ consulta.costo }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>
+{% endblock %}

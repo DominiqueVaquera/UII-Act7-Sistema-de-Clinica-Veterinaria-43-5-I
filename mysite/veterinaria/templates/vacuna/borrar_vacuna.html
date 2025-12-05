@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Borrar Vacuna</h1>
+<p>¿Estás seguro de que quieres borrar la vacuna "{{ vacuna.nombre }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Borrar</button>
+    <a href="{% url 'ver_vacunas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

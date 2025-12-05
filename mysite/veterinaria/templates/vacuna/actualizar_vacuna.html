@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Actualizar Vacuna</h1>
+<form method="post" action="{% url 'realizar_actualizacion_vacuna' vacuna.id_vacuna %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ vacuna.nombre }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="tipo" class="form-label">Tipo</label>
+        <input type="text" class="form-control" id="tipo" name="tipo" value="{{ vacuna.tipo }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="fecha_aplicacion" class="form-label">Fecha de Aplicación</label>
+        <input type="date" class="form-control" id="fecha_aplicacion" name="fecha_aplicacion" value="{{ vacuna.fecha_aplicacion|date:'Y-m-d' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="id_mascota" class="form-label">Mascota</label>
+        <select class="form-select" id="id_mascota" name="id_mascota" required>
+            {% for mascota in mascotas %}
+                <option value="{{ mascota.id_mascota }}" {% if mascota.id_mascota == vacuna.id_mascota.id_mascota %}selected{% endif %}>{{ mascota.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>
+{% endblock %}
