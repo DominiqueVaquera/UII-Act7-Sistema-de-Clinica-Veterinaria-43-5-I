@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Vacunas</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Fecha de Aplicación</th>
+            <th scope="col">Mascota</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vacuna in vacunas %}
+            <tr>
+                <th scope="row">{{ vacuna.id_vacuna }}</th>
+                <td>{{ vacuna.nombre }}</td>
+                <td>{{ vacuna.tipo }}</td>
+                <td>{{ vacuna.fecha_aplicacion }}</td>
+                <td>{{ vacuna.id_mascota.nombre }}</td>
+                <td>
+                    <a href="{% url 'actualizar_vacuna' vacuna.id_vacuna %}" class="btn btn-primary">Actualizar</a>
+                    <a href="{% url 'borrar_vacuna' vacuna.id_vacuna %}" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'agregar_vacuna' %}" class="btn btn-success">Agregar Vacuna</a>
+{% endblock %}

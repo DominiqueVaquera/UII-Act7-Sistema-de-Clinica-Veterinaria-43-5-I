@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Borrar Consulta</h1>
+<p>¿Estás seguro de que quieres borrar la consulta de {{ consulta.id_mascota.nombre }} del {{ consulta.fecha_consulta }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Borrar</button>
+    <a href="{% url 'ver_consultas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

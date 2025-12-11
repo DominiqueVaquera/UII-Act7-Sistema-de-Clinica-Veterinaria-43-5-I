@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Ver Mascotas</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Raza</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Fecha de Nacimiento</th>
+                <th scope="col">Dueño</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mascota in mascotas %}
+            <tr>
+                <th scope="row">{{ mascota.id_mascota }}</th>
+                <td>{{ mascota.nombre }}</td>
+                <td>{{ mascota.raza }}</td>
+                <td>{{ mascota.sexo }}</td>
+                <td>{{ mascota.fecha_nacimiento }}</td>
+                <td>{{ mascota.id_dueño.nombre }}</td>
+                <td>
+                    <a href="/actualizar_mascota/{{ mascota.id_mascota }}" class="btn btn-primary">Editar</a>
+                    <a href="/borrar_mascota/{{ mascota.id_mascota }}" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

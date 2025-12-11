@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Actualizar Mascota</h1>
+    <form action="/realizar_actualizacion_mascota/{{ mascota.id_mascota }}/" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ mascota.nombre }}">
+        </div>
+        <div class="mb-3">
+            <label for="especie" class="form-label">Especie</label>
+            <input type="text" class="form-control" id="especie" name="especie" value="{{ mascota.especie }}">
+        </div>
+        <div class="mb-3">
+            <label for="raza" class="form-label">Raza</label>
+            <input type="text" class="form-control" id="raza" name="raza" value="{{ mascota.raza }}">
+        </div>
+        <div class="mb-3">
+            <label for="sexo" class="form-label">Sexo</label>
+            <input type="text" class="form-control" id="sexo" name="sexo" value="{{ mascota.sexo }}">
+        </div>
+        <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ mascota.fecha_nacimiento|date:"Y-m-d" }}">
+        </div>
+        <div class="mb-3">
+            <label for="peso" class="form-label">Peso</label>
+            <input type="number" step="0.01" class="form-control" id="peso" name="peso" value="{{ mascota.peso }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_dueño" class="form-label">Dueño</label>
+            <select class="form-select" id="id_dueño" name="id_dueño">
+                {% for dueño in dueños %}
+                <option value="{{ dueño.id_dueño }}" {% if dueño.id_dueño == mascota.id_dueño.id_dueño %}selected{% endif %}>{{ dueño.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>
+{% endblock %}
